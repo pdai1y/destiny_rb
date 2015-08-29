@@ -4,7 +4,7 @@ module Destiny
     # GET information about a place, specifically a planet.
     #
     # Usage:
-    #  destiny.place('3747705955')
+    #  client.place('3747705955')
     #
     # Arguments:
     #  place_hash: (String)
@@ -17,7 +17,7 @@ module Destiny
     # GET information about a destination, specifically a location on a planet.
     #
     # Usage:
-    #  destiny.destination('518553403')
+    #  client.destination('518553403')
     #
     # Arguments:
     #  destination_hash: (String)
@@ -26,6 +26,6 @@ module Destiny
       raw_data = self.class.get('/Manifest/Destination/#{destination_hash}').parsed_response['Response']['data']
       response = { dest_name: raw_data['destinationName'], dest_desc: raw_data['destinationDescription'] }
     end
-    
+
   end
 end

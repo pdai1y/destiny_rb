@@ -14,12 +14,12 @@ module Destiny
       parsed = raw_data.parsed_response['Response']['data']
     end
 
-    # GET the activity information from http://www.bungie.net/platform/destiny/manifest/activity/{activity_hash}/
+    # GET the activity information from '/manifest/activity/{activity_hash}/'
     #
     # Raw argument will return an unmodified respons from Bungie.
     #
     # Usage:
-    #   destiny.activity('3508129769', false)
+    #   client.activity('3508129769', false)
     #
     # Arguments:
     #   activity_hash: (String)
@@ -46,28 +46,28 @@ module Destiny
       end
     end
 
-    # GET the weekly nightfall info from http://www.bungie.net/platform/destiny/manifest/activity/#{activity_hash}
+    # GET the weekly nightfall info from '/manifest/activity/#{activity_hash}'
     #
     # Optional boolean argument.
     #
     # Usage:
-    #  destiny.nightfall(true)
+    #  client.nightfall(true)
     #
     # Arguments:
     #  raw: (boolean)
     #
     def nightfall(raw=false)
       nightfall_activity_hash = self.daily_report['nightfallActivityHash']
-      activity_search(nightfall_activity_hash)
+      activity_search(nightfall_activity_hash, raw)
     end
 
-    # GET the weekly strike info from http://www.bungie.net/platform/destiny/manifest/activity/#{activity_hash}
+    # GET the weekly strike info from '/manifest/activity/#{activity_hash}'
     # Returns an array of three items, only need one for the skulls and location.
     #
     # Optional boolean argument, defaults to false from activity method to return basic information for Lita bot.
     #
     # Usage:
-    #  destiny.weekly_strike(false)
+    #  client.weekly_strike(false)
     #
     # Arguments:
     #  raw: (boolean)
@@ -77,10 +77,16 @@ module Destiny
       activity_search(heroic_strike_hashes[0], raw)
     end
 
-    # GET the weekly nightfall info from http://www.bungie.net/platform/destiny/manifest/activity/#{activity_hash}
+    # GET the weekly prison of elders pulled info from '/advisors' endpoint
+    # Without any arguments, only returns the level 32 information.
     #
-    # No known endpoints.
-    def arena(raw=false, level=32)
+    # Usage:
+    #  client.arena(34)
+    #
+    # Arguments:
+    #  level: (integer)
+    #
+    def arena(level=32)
       arenas = self.daily_report['arena']
       case level
        when 32

@@ -26,7 +26,7 @@ module Destiny
     # Init the Destiny API with Bungie API stored in ENV variable
     #
     # Usage:
-    #   destiny = Destiny::Client.new('6971067dec36c6597cd57789a62f48f0')
+    #   client = Destiny::Client.new('6971067dec36c6597cd57789a62f48f0')
     #
     # Arguments:
     #   api_token: (String)

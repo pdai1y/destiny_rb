@@ -2,7 +2,7 @@ module Destiny
   module Vendors
 
     # WIP: Pull xur inventory
-    # http://www.bungie.net/platform/destiny/advisors/xur/
+    # '/advisors/xur/''
     def xur(raw=false)
       raw_data = self.class.get('/Advisors/Xur/').parsed_response['Response']
 

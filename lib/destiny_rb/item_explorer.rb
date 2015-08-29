@@ -5,7 +5,7 @@ module Destiny
     #
     # Usage:
     #   client.types(:armor)
-    #   client.enemy_race(2)
+    #   client.types(2)
     #
     # Arguments:
     #   type: (String/Symbol)
