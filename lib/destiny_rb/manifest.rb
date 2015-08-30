@@ -1,6 +1,19 @@
 module Destiny
   module Manifest
 
+    def search_destiny_player(player_name, platform_type)
+      raw_data = self.class.get("/SearchDestinyPlayer/#{platform_type}/#{player_name}/").parsed_response['Response']['membershipId']
+    end
+
+    def get_destiny_account(player_name, platform_type)
+      member_id = self.search_destiny_player(player_name, platform_type)
+      raw_data = self.class.get("/#{platform_type}/Account/#{member_id}/").parsed_response['Response']['data']
+    end
+
+    def get_manifest_item(type_id, item_id)
+      raw_data = self.class.get("/Manifest/#{type_id}/#{item_id}").parsed_response['Response']['data']['inventoryItem']
+    end
+
     # GET information about a place, specifically a planet.
     #
     # Usage:
