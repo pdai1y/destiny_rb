@@ -9,7 +9,7 @@ module Destiny
       if raw
         raw_data
       elsif raw_data.empty?
-        return { status: "Xur is not in the game world." }
+        return nil
       else
         vendor_hash = raw_data['data']['vendorHash']
         sale_items = {}
