@@ -184,7 +184,7 @@ module Destiny
       buckets = buckets(options[:buckets] || 'none')
       page = options[:page] || 0
       count = options[:count] || 250
-      self.class.get("/Explorer/Items/?definitions=#{definitions}&count=#{count}&characterClass=#{character_class}&types=#{types}&subtype=#{sub_type}&order=#{order}&rarity=#{rarity}&buckets=#{buckets}&page=#{page}")
+      self.class.get("/Explorer/Items/?definitions=#{definitions}&count=#{count}&characterClass=#{character_class}&types=#{types}&subtype=#{sub_type}&order=#{order}&rarity=#{rarity}&buckets=#{buckets}&page=#{page}", headers: @headers)
     end
 
   end

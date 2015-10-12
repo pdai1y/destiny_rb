@@ -28,4 +28,5 @@ describe Destiny::Manifest do
   describe "#destination" do
     it "should return a JSON object containing destination details" do
     end
+  end
 end

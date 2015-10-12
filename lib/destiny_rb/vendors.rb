@@ -4,7 +4,7 @@ module Destiny
     # WIP: Pull xur inventory
     # '/advisors/xur/''
     def xur(raw=false)
-      raw_data = self.class.get('/Advisors/Xur/').parsed_response['Response']
+      raw_data = self.class.get('/Advisors/Xur/', headers: @headers).parsed_response['Response']
 
       if raw
         raw_data
@@ -23,7 +23,7 @@ module Destiny
     end
 
     def vendor(vendor_hash)
-      raw_data = self.class.get("/Manifest/Vendor/#{vendor_hash}").parsed_response['Response']['data']['vendor']['summary']
+      raw_data = self.class.get("/Manifest/Vendor/#{vendor_hash}", headers: @headers).parsed_response['Response']['data']['vendor']['summary']
     end
 
   end

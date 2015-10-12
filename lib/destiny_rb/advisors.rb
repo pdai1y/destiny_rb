@@ -34,7 +34,7 @@ module Destiny
     #   If raw = true, returns whole response back from bungie.
     #
     def activity_search(activity_hash, raw=false)
-      raw_data = self.class.get("/Manifest/Activity/#{activity_hash}").parsed_response['Response']['data']['activity']
+      raw_data = self.class.get("/Manifest/Activity/#{activity_hash}", headers: @headers).parsed_response['Response']['data']['activity']
       skulls = []
       raw_data['skulls'].each do |skull|
         skulls << skull['displayName']

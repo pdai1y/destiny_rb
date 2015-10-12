@@ -2,16 +2,16 @@ module Destiny
   module Manifest
 
     def search_destiny_player(player_name, platform_type)
-      raw_data = self.class.get("/SearchDestinyPlayer/#{platform_type}/#{player_name}/").parsed_response['Response']['membershipId']
+      raw_data = self.class.get("/SearchDestinyPlayer/#{platform_type}/#{player_name}/", headers: @headers).parsed_response['Response']['membershipId']
     end
 
     def get_destiny_account(player_name, platform_type)
       member_id = self.search_destiny_player(player_name, platform_type)
-      raw_data = self.class.get("/#{platform_type}/Account/#{member_id}/").parsed_response['Response']['data']
+      raw_data = self.class.get("/#{platform_type}/Account/#{member_id}/", headers: @headers).parsed_response['Response']['data']
     end
 
     def get_manifest_item(type_id, item_id)
-      raw_data = self.class.get("/Manifest/#{type_id}/#{item_id}").parsed_response['Response']['data']['inventoryItem']
+      raw_data = self.class.get("/Manifest/#{type_id}/#{item_id}", headers: @headers).parsed_response['Response']['data']['inventoryItem']
     end
 
     # GET information about a place, specifically a planet.
@@ -23,7 +23,7 @@ module Destiny
     #  place_hash: (String)
     #
     def place(place_hash)
-      raw data = self.class.get('/Manifest/Place/#{place_hash}').parsed_response['Response']['data']['place']
+      raw data = self.class.get('/Manifest/Place/#{place_hash}', headers: @headers).parsed_response['Response']['data']['place']
       response = { place_name: raw_data['placeName'], place_desc: raw_data['placeDescription'] }
     end
 
@@ -36,7 +36,7 @@ module Destiny
     #  destination_hash: (String)
     #
     def destination(destination_hash)
-      raw_data = self.class.get('/Manifest/Destination/#{destination_hash}').parsed_response['Response']['data']
+      raw_data = self.class.get('/Manifest/Destination/#{destination_hash}', headers: @headers).parsed_response['Response']['data']
       response = { dest_name: raw_data['destinationName'], dest_desc: raw_data['destinationDescription'] }
     end
 
