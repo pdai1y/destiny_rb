@@ -42,7 +42,7 @@ module Destiny
       if raw
         raw_data
       else
-        parsed_data = { activityName: raw_data['activityName'], activityDescription: raw_data['activityDescription'], skulls: skulls }
+        parsed_data = { activityName: raw_data['activityName'], activityDescription: raw_data['activityDescription'], skulls: skulls, pgcrImage: raw_data['pgcrImage'] }
       end
     end
 

@@ -22,7 +22,7 @@ describe Destiny::Advisors do
       end
 
       it "returns only the interesting keys", :vcr do
-        expect(client.activity_search(1749151224, false).keys).to contain_exactly(:activityName, :activityDescription, :skulls)
+        expect(client.activity_search(1749151224, false).keys).to contain_exactly(:activityName, :activityDescription, :pgcrImage, :skulls)
       end
     end
   end
@@ -31,8 +31,20 @@ describe Destiny::Advisors do
     context "when raw is false" do
       let(:response) { client.nightfall(false) }
 
-      it "includes activeSkulls and specificActivity", :vcr do
-        expect(response.keys).to include(:activeSkulls, :specificActivity)
+      it "includes activeSkulls and specificActivity and pgcrImage", :vcr do
+        expect(response.keys).to include(:activeSkulls, :specificActivity, :pgcrImage)
+      end
+
+      it "has a jpg", :vcr do
+          expect(response[:pgcrImage]).to include('jpg')
+      end
+    end
+
+    context "when raw is true" do
+      let(:response) { client.nightfall(true) }
+
+      it "returns all of the data in a parsed JSON", :vcr do 
+        expect(response).to be_a(Hash)
       end
     end
   end
