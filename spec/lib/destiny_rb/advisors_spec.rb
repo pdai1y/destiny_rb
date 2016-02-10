@@ -11,18 +11,25 @@ describe Destiny::Advisors do
 
   describe "#activity_search" do
     context "when raw is true" do
+      let(:response) { client.activity_search(1749151224, true) }
+
       it "returns all of the data in parsed JSON", :vcr do
-        expect(client.activity_search(1749151224, true)).to be_a(Hash)
+        expect(response).to be_a(Hash)
       end
     end
 
     context "when raw is false" do
+      let(:response) { client.activity_search(1749151224, false) }
       it "returns the data in a parsed JSON object", :vcr do
-        expect(client.activity_search(1749151224, false)).to be_a(Hash)
+        expect(response).to be_a(Hash)
       end
 
       it "returns only the interesting keys", :vcr do
-        expect(client.activity_search(1749151224, false).keys).to contain_exactly(:activityName, :activityDescription, :pgcrImage, :skulls)
+        expect(response.keys).to contain_exactly(:activityName, :activityDescription, :pgcrImage, :skulls)
+      end
+
+      it "has a jpg", :vcr do
+        expect(response[:pgcrImage]).to include('jpg')
       end
     end
   end
@@ -36,7 +43,7 @@ describe Destiny::Advisors do
       end
 
       it "has a jpg", :vcr do
-          expect(response[:pgcrImage]).to include('jpg')
+        expect(response[:pgcrImage]).to include('jpg')
       end
     end
 
@@ -44,6 +51,28 @@ describe Destiny::Advisors do
       let(:response) { client.nightfall(true) }
 
       it "returns all of the data in a parsed JSON", :vcr do 
+        expect(response).to be_a(Hash)
+      end
+    end
+  end
+
+  describe "weekly_strike" do
+    context "when raw is false" do 
+      let (:response) { client.weekly_strike(false)}
+
+      it "returns the data in a parsed JSON object", :vcr do
+        expect(response).to be_a(Hash)
+      end
+
+      it "has a jpg", :vcr do
+        expect(response[:pgcrImage]).to include('jpg')
+      end
+    end
+
+    context "when raw is true" do 
+      let (:response) { client.weekly_strike(true)}
+
+      it "returns the data in a parsed JSON object", :vcr do
         expect(response).to be_a(Hash)
       end
     end
