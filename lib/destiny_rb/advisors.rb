@@ -29,7 +29,7 @@ module Destiny
     #   A JSON object containing activity information based on the activity hash supplied with:
     #     activityName: (String)
     #     activityDescription: (String)
-    #     skulls: (Array)(Strings)
+    #     skulls: (Array)(Hash)(Strings)
     #
     #   If raw = true, returns whole response back from bungie.
     #
@@ -37,7 +37,7 @@ module Destiny
       raw_data = self.class.get("/Manifest/Activity/#{activity_hash}", headers: @headers).parsed_response['Response']['data']['activity']
       skulls = []
       raw_data['skulls'].each do |skull|
-        skulls << skull['displayName']
+        skulls << { :name => skull['displayName'], :description => skull['description'], :icon => skull['icon'] }
       end
       if raw
         raw_data

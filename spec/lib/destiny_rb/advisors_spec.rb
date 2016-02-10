@@ -45,6 +45,14 @@ describe Destiny::Advisors do
       it "has a jpg", :vcr do
         expect(response[:pgcrImage]).to include('jpg')
       end
+
+      it "has hashes of skulls", :vcr do 
+        expect(response[:activeSkulls].first).to be_a(Hash)
+      end
+
+      it "should have skull keys for name and details and icon", :vcr do
+        expect(response[:activeSkulls].first.keys).to contain_exactly(:name, :description, :icon)
+      end
     end
 
     context "when raw is true" do
