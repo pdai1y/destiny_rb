@@ -50,8 +50,24 @@ describe Destiny::Advisors do
         expect(response[:activeSkulls].first).to be_a(Hash)
       end
 
-      it "should have skull keys for name and details and icon", :vcr do
-        expect(response[:activeSkulls].first.keys).to contain_exactly(:name, :description, :icon)
+      context "when skulls are present" do
+        let(:skull) { response[:activeSkulls].first }
+
+        it "should have name and details and icon", :vcr do
+          expect(skull.keys).to contain_exactly(:name, :description, :icon)
+        end
+
+        it "should have an icon", :vcr do
+          expect(skull[:icon]).to include('png')
+        end
+
+        it "should have a name", :vcr do
+          expect(skull[:icon]).to be_a(String)
+        end
+
+        it "should have a description", :vcr do
+          expect(skull[:icon]).to be_a(String)
+        end
       end
     end
 
