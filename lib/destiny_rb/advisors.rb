@@ -57,8 +57,23 @@ module Destiny
     #  raw: (boolean)
     #
     def nightfall(raw=false)
-      nightfall_activity_hash = self.daily_report['nightfallActivityHash']
-      activity_search(nightfall_activity_hash, raw)
+      nightfall_info = self.daily_report["nightfall"]
+
+      nightfall_activity_hash = nightfall_info["activityBundleHash"]
+      activity_info = activity_search(nightfall_activity_hash, raw)
+
+      if raw
+        activity_info
+      else
+        active_skulls = nightfall_info["tiers"][0]["skullIndexes"]
+        all_skulls = activity_info[:skulls]
+
+        activity_info[:activeSkulls] = active_skulls.map { |index| all_skulls[index] }
+
+        specific_activity = activity_search(nightfall_info["tiers"][0]["specificActivityHash"])
+        activity_info[:specificActivity] = specific_activity
+        activity_info
+      end
     end
 
     # GET the weekly strike info from '/manifest/activity/#{activity_hash}'

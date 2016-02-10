@@ -8,7 +8,7 @@ module Destiny
 
       if raw
         raw_data
-      elsif raw_data.empty?
+      elsif raw_data.empty? || raw_data.nil?
         return nil
       else
         vendor_hash = raw_data['data']['vendorHash']

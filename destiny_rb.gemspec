@@ -37,4 +37,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov", "~> 0.10", ">= 0.10.0"
   spec.add_development_dependency "coveralls", "~> 0.8", ">= 0.8.1"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.4", ">= 0.4.7"
+  spec.add_development_dependency "vcr"
+  spec.add_development_dependency "multi_json"
+  spec.add_development_dependency "webmock"
+  spec.add_development_dependency "dotenv"
 end
